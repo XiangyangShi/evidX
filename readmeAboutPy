@@ -1,0 +1,40 @@
+Oct.16th
+Wed 16:03
+ISI-MDR
+
+This week I try an algorithm to split subimages.
+
+Images extracted from pdfs usually has the similar fonts:
+  Usually a specific conference named a standards for all the formats.
+
+What we shall do is:
+1. find the coordinates (X,Y) of the tags which is used to mark the subimages.
+2. find an algorithm to split images according to coordinates we get.
+
+Step 1.
+We can use different sizes of flipping windows to move inside the wholeImage.
+And then we utilize model recognition methods to match all windows we get.
+In my demo I just count the sum of differences from 2 pixles.
+Find the window with the greatest similarity with our model "A""B"or"C"
+Note the coordinates for the window.
+Repeat this process again.
+
+Step 2.
+For a specific group of coordinates, we have serveral different layouts of grids, even in different orders.
+I want to extract from the last to first.
+Each time we extract last subimage ( square area from (x,y) to (wholeImage.maxX,wholeImage.maxY) ) , and replace it with blank.
+When we get the next subimage, it may contain the blank area we just filled.
+We can cut the margin (which only contain white pixels).
+
+It seems Step2 works very well in most cases. 
+Only some extrem sceneary can cause problems, but the result still make sense to some extend.e 
+The accuracy is no better than 30%
+### The main problem comes from the slow process of Step1.
+I guess deeplearning methods can be faster and more accurate.
+
+I shall extract a dataset for trainging an OCR next week.
+Huai Gu gives me an approachable way to train OCR, I may try later and talked to Rex.
+
+
+Trumpet SHI
+Squrriel Terminator
